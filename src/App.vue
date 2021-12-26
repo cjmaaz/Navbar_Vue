@@ -1,10 +1,23 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    <Sidebar />
+    <!--<div :style="{ 'margin-left': sidebarWidth }">-->
+    <div :style="{ 'margin-left': '38px' }">
+      <router-view />
+    </div>
   </div>
-  <router-view/>
 </template>
+
+<script>
+import Sidebar from "@/components/Sidebar";
+import { sidebarWidth } from "@/store/state";
+export default {
+  components: { Sidebar },
+  setup() {
+    return { sidebarWidth };
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -25,6 +38,19 @@
     &.router-link-exact-active {
       color: #42b983;
     }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  &.show {
+    display: block;
   }
 }
 </style>
